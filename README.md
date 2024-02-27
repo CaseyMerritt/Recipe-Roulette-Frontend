@@ -3,7 +3,7 @@
    
 # Run Program
 1. Open Project in VSCode run the following in terminal
-2. npm i (install dependencies)
+2. npm i
 3. npm start
 
 ## Available Scripts
