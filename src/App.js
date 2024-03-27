@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TagsInput from './components/Tagsinput';
 import FeaturedRecipes from './components/FeaturedRecipes';
+import RecipeCardDisplay from './components/RecipeCardDisplay';
 import './App.css';
 
 function App() {
@@ -9,8 +10,11 @@ function App() {
   const [tags, setTags] = useState([]); // For selected tags
   const [ingredients, setIngredients] = useState([]);
   const [aiTags, setAiTags] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [recipes, setRecipes] = useState([]);
+  
 
-  const recipes = [
+  const recipesTest = [
     {
       title: 'Spaghetti Carbonara',
       image: 'https://via.placeholder.com/150?text=Spaghetti+Carbonara',
@@ -47,7 +51,8 @@ function App() {
   };
 
   const handleSliderChange = (e) => {
-    setCount(e.target.value); // Update the slider value state
+    const intValue = parseInt(e.target.value, 10); // Convert to integer using base 10
+    setCount(intValue); // Update the state with the integer value
   };
 
   const getRecipes = async () => {
@@ -58,16 +63,23 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ count, tags }), // Send count and tags in the request body
+        body: JSON.stringify({ tags, count }), // Send count and tags in the request body
       });
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText} test`);
       }
       const data = await response.json();
       setData(data);
+
+      setRecipes(data);
+      setShowModal(true);
+
     } catch (error) {
       console.error('Failed to fetch data:', error);
     }
+
+    //setRecipes(recipesTest);
+    //setShowModal(true);
   };
 
   const getAiRecipes = async () => {
@@ -85,6 +97,10 @@ function App() {
       }
       const data = await response.json();
       setData(data);
+
+      setRecipes(data);
+      setShowModal(true);
+
     } catch (error) {
       console.error('Failed to fetch data:', error);
     }
@@ -143,11 +159,12 @@ function App() {
           </div>
         </div>
       </div>
-      <FeaturedRecipes recipes={recipes}></FeaturedRecipes>
+      <FeaturedRecipes recipes={recipesTest}></FeaturedRecipes>
+      {showModal && (
+        <RecipeCardDisplay recipes={recipes} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
-
-
 }
 
 export default App;
