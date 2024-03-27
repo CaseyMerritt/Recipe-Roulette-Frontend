@@ -1,25 +1,39 @@
-.app-container {
+.app-layout {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  min-height: 100vh; /* Instead of height, use min-height */
   background-color: #033232;
-  padding-top: 60px; /* Make space for the header */
+  width: 100%; /* Ensure it takes the full width */
 }
 
-.header {
-  position: fixed; /* Fixed at the top */
-  top: 0;
-  left: 0; /* Ensure header starts from the very left */
-  right: 0; /* Ensure header extends to the very right */
+.navbar {
   display: flex;
-  justify-content: right; /* Adjust content spacing */
-  align-items: center; /* Center items vertically */
-  padding: 10px 20px;
-  box-sizing: border-box; /* Include padding in the element's total width */
-  background-color: #033232; /* Same as app background for consistency */
-  z-index: 1000; /* Ensures the header is above other content */
+  justify-content: right;
+  width: 100%;
+  padding: 10px 20px; /* Adjust padding as needed */
+}
+
+.navbar-section {
+  padding: 10px;
+  display: flex;
+}
+
+.app-content {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  min-height: 100vh; /* Instead of height, use min-height */
+  flex: 1; /* This will make app-content grow to fill available space */
+}
+
+.left-section, .right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%; /* Adjust width as needed */
 }
 
 .header-section {
@@ -34,47 +48,25 @@
   margin-left: 0;
 }
 
-.centered-logo {
-  max-width: 512px; /* Adjust based on your logo size */
-}
-
 .click-me-button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #FEA236;
+  color: white;
+  border: none;
+  border-radius: 4px;
 }
 
-.data-display {
-  color: #000000;
-  text-align: center;
-}
-
-.settings-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.settings-container > div {
-  width: 100%; /* Ensures each child div takes up the full width */
-  display: flex;
-  justify-content: center; /* Centers the content of the divs */
-}
-
-
-.settings-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+.click-me-button:hover {
+  background-color: #F85A00;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   width: 100%; /* Ensures the div takes up the full width of its parent */
+  margin-top: 20px;
 }
 
 .range{
@@ -127,3 +119,35 @@
   color: #fff;
 }
 
+.login-button {
+  /* Style your login button as needed */
+  padding: 8px 15px;
+  background-color: #FEA236; /* Bootstrap primary blue, adjust as needed */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #F85A00; /* Darker blue on hover, adjust as needed */
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.centered-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.centered-logo {
+  max-width: 512px; /* Adjust based on your logo size */
+  max-height: 512px;
+}

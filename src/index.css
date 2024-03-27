@@ -12,56 +12,6 @@ code {
     monospace;
 }
 
-.tags-input-container {
-  padding: .5em;
-  border-radius: 3px;
-  border: .05em solid #ccc;
-  width: min(40vw, 400px);
-  margin-top: 1em;
-  margin-bottom: 1em;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: .5em;
-}
 
-.tag-item{
-  background-color: #c4c4c4;
-  display: inline-block;
-  padding: .5em .75em;
-  border-radius: 20px;
-}
 
-.tag-item .close{
-  height: 20px;
-  width: 20px;
-  color: #000000;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: .5em;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.tags-input{
-  background-color: #033232;
-  color: #fff; /* Set text color to white */
-  flex-grow: 1;
-  padding: .5em 0;
-  border: none;
-  margin-right: 0.5em; /* Adds some space on the right of the input */
-  outline: none;
-  width: 100%;
-}
-
-.tags-input::placeholder {
-  color: #fff; /* White color */
-  opacity: 1; /* Optional: Ensures the placeholder text is fully opaque */
-}
-
-.input-wrapper {
-  flex-basis: 100%; /* Forces the input wrapper to take the full width */
-}
 

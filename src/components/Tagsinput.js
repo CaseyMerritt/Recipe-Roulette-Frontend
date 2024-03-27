@@ -1,6 +1,7 @@
 import { useState } from "react"
+import './Tagsinput.css';
 
-function TagsInput({ setAppTags }){
+function TagsInput({ setAppTags, placeholderText }){
     const [tags, setTags] = useState([])
 
     function handleKeyDown(e){
@@ -28,7 +29,7 @@ function TagsInput({ setAppTags }){
                 </div>
             ))}
             <div className="input-wrapper"> {/* New wrapper for the input */}
-                <input onKeyDown={handleKeyDown} className="tags-input" placeholder="Add a tag" />
+                <input onKeyDown={handleKeyDown} className="tags-input" placeholder={placeholderText} />
             </div>
         </div>
     )

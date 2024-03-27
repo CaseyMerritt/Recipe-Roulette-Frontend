@@ -1,0 +1,62 @@
+.featured-recipes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure it takes the full width of the screen */
+    max-height: 300px; /* Limit the maximum height */
+    overflow: hidden; /* Hide overflow */
+  }
+  
+  .recipes-container {
+    display: flex;
+    justify-content: space-between; /* Spread the cards across the container */
+    width: 100%; /* Take up the full width of its parent */
+    padding: 0 20px; /* Padding on the sides */
+  }
+  
+  .recipe-card {
+    display: flex;
+    width: 25%; /* Adjust width to fit 4 cards across, accounting for margin */
+    background-color: #ffffff;
+    
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: hidden; /* Ensure content doesn't overflow the card */
+  }
+
+  .recipe-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This ensures that children are justified to top and bottom */
+    flex-grow: 1; /* Allows this container to take up all available space */
+  }
+
+  .recipe-title {
+        /* Additional styling as needed */
+  }
+  
+  .recipe-description {
+    flex-grow: 1; /* This will push the title to the top and the button to the bottom */
+  }
+
+  .recipe-image {
+    width: 40%; /* Adjust image width as needed */
+    height: auto;
+    margin-right: 10px; /* Space between image and title */
+    object-fit: cover; /* Ensure the image covers the area, might crop */
+  }
+  
+  .view-more-button {
+    padding: 8px 16px;
+    background-color: #FEA236; /* Bootstrap primary blue */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-start; /* Align button to the bottom of its container */
+  }
+  
+  .view-more-button:hover {
+    background-color: #F85A00; /* Darker blue on hover */
+  }
+  
