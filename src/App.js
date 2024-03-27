@@ -103,39 +103,43 @@ function App() {
       </div>
       <div className="app-content">
         <div className="left-section">
-          <div className="header-section">Plan Your Week!</div>
-          <div className='slider-container'>
-            <div className='range'>
-              <div className='slider-value'>
-                <span>{count}</span>
-              </div>
-              <div className='field'>
-                <div className='value-left'>1</div>
-                <input type='range' min={1} max={14} value={count} step={1} onChange={handleSliderChange}></input>
-                <div className='value-right'>14</div>
+          <div className='border-box'>
+            <div className="header-section">Plan Your Week!</div>
+            <div className='slider-container'>
+              <div className='range'>
+                <div className='slider-value'>
+                  <span>{count}</span>
+                </div>
+                <div className='field'>
+                  <div className='value-left'>1</div>
+                  <input type='range' min={1} max={14} value={count} step={1} onChange={handleSliderChange}></input>
+                  <div className='value-right'>14</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div>
-            <TagsInput setAppTags={updateTags} placeholderText="Add a tag"></TagsInput>
-          </div>
-          <div className="button-container">
-            <button onClick={getRecipes} className="click-me-button">Submit</button>
+            <div>
+              <TagsInput setAppTags={updateTags} placeholderText="Add a tag"></TagsInput>
+            </div>
+            <div className="button-container">
+              <button onClick={getRecipes} className="click-me-button">Submit</button>
+            </div>
           </div>
         </div>
         <div className="centered-logo-container">
           <img src={'/RecipeRouletteLogo.png'} alt="Logo" className="centered-logo" />
         </div>
         <div className="right-section">
-          <div className="header-section">Clear Out Your Fridge!</div>
-          <div>
-            <TagsInput setAppTags={updateIngredients} placeholderText="Add an ingredient"></TagsInput>
-          </div>
-          <div>
-            <TagsInput setAppTags={updateAiTags} placeholderText="Add a tag"></TagsInput>
-          </div>
-          <div className="button-container">
-            <button onClick={getAiRecipes} className="click-me-button">Submit</button>
+          <div className='border-box'>
+            <div className="header-section">Clear Out Your Fridge!</div>
+            <div>
+              <TagsInput setAppTags={updateIngredients} placeholderText="Add an ingredient"></TagsInput>
+            </div>
+            <div>
+              <TagsInput setAppTags={updateAiTags} placeholderText="Add a tag"></TagsInput>
+            </div>
+            <div className="button-container">
+              <button onClick={getAiRecipes} className="click-me-button">Submit</button>
+            </div>
           </div>
         </div>
       </div>
