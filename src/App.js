@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import TagsInput from './components/Tagsinput';
 import FeaturedRecipes from './components/FeaturedRecipes';
 import RecipeCardDisplay from './components/RecipeCardDisplay';
+import Register from './components/register';
+import Login from "./components/login";
+
 import './App.css';
 
 function App() {
@@ -12,6 +15,26 @@ function App() {
   const [aiTags, setAiTags] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [recipes, setRecipes] = useState([]);
+  const[currentForm, setCurrentForm]= useState('login');
+
+
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
+  };
+
+  return (
+    <div className="App">
+      {currentForm === 'login' ? (
+        <Login onFormSwitch={toggleForm} />
+      ) : (
+        <Register onFormSwitch={toggleForm} />
+      )}
+    </div>
+  );
+}
+
+export default App;
+
   
 
   const recipesTest = [
@@ -109,62 +132,59 @@ function App() {
   if (data) {
     console.log(data);
   }
-
+ 
   return (
     <div className="app-layout">
-      <div className="navbar">
+      <><div className="navbar">
         <div className="navbar-section">
-          <button className="login-button">Login</button>
+           <button className="login-button">Login</button> 
         </div>
-      </div>
-      <div className="app-content">
-        <div className="left-section">
-          <div className='border-box'>
-            <div className="header-section">Plan Your Week!</div>
-            <div className='slider-container'>
-              <div className='range'>
-                <div className='slider-value'>
-                  <span>{count}</span>
-                </div>
-                <div className='field'>
-                  <div className='value-left'>1</div>
-                  <input type='range' min={1} max={14} value={count} step={1} onChange={handleSliderChange}></input>
-                  <div className='value-right'>14</div>
+      </div><div className="app-content">
+          <div className="left-section">
+            <div className='border-box'>
+              <div className="header-section">Plan Your Week!</div>
+              <div className='slider-container'>
+                <div className='range'>
+                  <div className='slider-value'>
+                    <span>{count}</span>
+                  </div>
+                  <div className='field'>
+                    <div className='value-left'>1</div>
+                    <input type='range' min={1} max={14} value={count} step={1} onChange={handleSliderChange}></input>
+                    <div className='value-right'>14</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <TagsInput setAppTags={updateTags} placeholderText="Add a tag"></TagsInput>
-            </div>
-            <div className="button-container">
-              <button onClick={getRecipes} className="click-me-button">Submit</button>
-            </div>
-          </div>
-        </div>
-        <div className="centered-logo-container">
-          <img src={'/RecipeRouletteLogo.png'} alt="Logo" className="centered-logo" />
-        </div>
-        <div className="right-section">
-          <div className='border-box'>
-            <div className="header-section">Clear Out Your Fridge!</div>
-            <div>
-              <TagsInput setAppTags={updateIngredients} placeholderText="Add an ingredient"></TagsInput>
-            </div>
-            <div>
-              <TagsInput setAppTags={updateAiTags} placeholderText="Add a tag"></TagsInput>
-            </div>
-            <div className="button-container">
-              <button onClick={getAiRecipes} className="click-me-button">Submit</button>
+              <div>
+                <TagsInput setAppTags={updateTags} placeholderText="Add a tag"></TagsInput>
+              </div>
+              <div className="button-container">
+                <button onClick={getRecipes} className="click-me-button">Submit</button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <FeaturedRecipes recipes={recipesTest}></FeaturedRecipes>
+          <div className="centered-logo-container">
+            <img src={'/RecipeRouletteLogo.png'} alt="Logo" className="centered-logo" />
+          </div>
+          <div className="right-section">
+            <div className='border-box'>
+              <div className="header-section">Clear Out Your Fridge!</div>
+              <div>
+                <TagsInput setAppTags={updateIngredients} placeholderText="Add an ingredient"></TagsInput>
+              </div>
+              <div>
+                <TagsInput setAppTags={updateAiTags} placeholderText="Add a tag"></TagsInput>
+              </div>
+              <div className="button-container">
+                <button onClick={getAiRecipes} className="click-me-button">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div><FeaturedRecipes recipes={recipesTest}></FeaturedRecipes></>
       {showModal && (
         <RecipeCardDisplay recipes={recipes} onClose={() => setShowModal(false)} />
       )}
     </div>
   );
-}
-
-export default App;
+      
+// export default App;
