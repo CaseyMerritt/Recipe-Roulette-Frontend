@@ -22,6 +22,7 @@
     max-height: 100%;
     overflow-x: auto;
     padding-top: 40px; /* Add padding to the top to make space for the close button */
+    padding-bottom: 40px;
   }
   
   .modal-button-container {
@@ -54,6 +55,41 @@
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 300px; /* Fixed width for each card */
+  }
+
+  /* Responsive adjustment */
+  @media (max-width: 768px) {
+      .recipe-card-modal {
+          width: 90%; /* Adapt width for smaller screens */
+          margin: 20px; /* Smaller margin on smaller screens */
+      }
+  }
+
+  .select-button-container{
+    display: flex;
+    align-items: center; /* Correctly align items to the center vertically */
+    justify-content: flex-start; /* Align child elements to the left */
+    width: 100%; /* Extend to full width of the parent */
+    margin-bottom: 10px;
+  }
+
+  .select-button-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    background-color: #ccc;
+    color: white;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .select-button-modal:hover {
+      background-color: #aaa;
   }
   
   .recipe-image-modal {
@@ -87,3 +123,56 @@
     background: rgb(88, 88, 88);
   }
   
+  .share-button-modal {
+    position: absolute;
+    bottom: 0%; /* Sets the button 70% from the top or 30% from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half its width to truly center it */
+    padding: 10px 20px;
+    margin-top: 20px; /* Space above the button */
+    background-color: #4CAF50; /* A green background */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: center; /* Center the button within flex container */
+  }
+
+  .share-button-modal:hover {
+    background-color: #409140; /* Slightly darker green when hovered */
+  }
+
+  .email-input-container {
+    position: absolute;
+    bottom: 0%; /* Sets the button 70% from the top or 30% from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half its width to truly center it */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .email-input-modal {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  }
+
+.submit-email-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-email-button:hover {
+    background-color: #409140;
+}
+
