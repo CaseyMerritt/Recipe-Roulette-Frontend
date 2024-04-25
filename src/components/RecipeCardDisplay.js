@@ -45,16 +45,24 @@ function RecipeCardDisplay({ recipes, onClose }) {
         }
     };
 
+    const handleViewMore = (e, recipe) => {
+        e.stopPropagation(); // Stop the event from propagating to parent elements
+        console.log("Viewing more details for:", recipe.title); // Placeholder for whatever you want to do here
+    };
+
     const normalizedRecipes = Array.isArray(recipes) ? recipes : [recipes];
 
     return (
         <div className="modal-overlay" onClick={onClose}>
+            <div className='header-text'>
+                <h>Select Your Recipes!</h>
+            </div>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <div className='modal-button-container'>
                     <button className="modal-close-button" onClick={onClose}>&times;</button>
                 </div>
                 {normalizedRecipes.map((recipe, index) => (
-                    <div key={index} className="recipe-card-modal">
+                    <div key={index} className="recipe-card-modal" onClick={() => toggleRecipeSelection(recipe)}>
                         <div className='select-button-container'>
                             <button className="select-button-modal" onClick={() => toggleRecipeSelection(recipe)}>
                                 {selectedRecipes.includes(recipe) ? '✓' : ''}
@@ -63,7 +71,7 @@ function RecipeCardDisplay({ recipes, onClose }) {
                         <img src={recipe.image || placeholderImage} alt={recipe.title} className="recipe-image-modal" />
                         <div className="recipe-title-modal">{recipe.title}</div>
                         <p className='recipe-description-modal'>{recipe.description}</p>
-                        <button className="recipe-view-more-modal">View More</button>
+                        <button className="recipe-view-more-modal" onClick={(e) => handleViewMore(e, recipe)}>View More</button>
                     </div>
                 ))}
                 {!showEmailInput && <button className="share-button-modal" onClick={handleShareButtonClick}>Get Grocery List</button>}

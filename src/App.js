@@ -71,7 +71,7 @@ function App() {
       const data = await response.json();
       setData(data);
 
-      setRecipes(recipesTest);
+      setRecipes(data);
       setShowModal(true);
 
     } catch (error) {

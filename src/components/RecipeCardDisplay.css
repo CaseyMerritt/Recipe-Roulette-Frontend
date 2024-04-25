@@ -24,6 +24,14 @@
     padding-top: 40px; /* Add padding to the top to make space for the close button */
     padding-bottom: 40px;
   }
+
+  .header-text {
+    display: flex;
+    align-items: center; /* Correctly align items to the center vertically */
+    justify-content: center; /* Align child elements to the left */
+    color: white;
+    font-size: 30px;
+  }
   
   .modal-button-container {
     position: absolute;
@@ -56,6 +64,12 @@
     border-radius: 10px;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     width: 300px; /* Fixed width for each card */
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition for transform */
+  }
+  
+  .recipe-card-modal:hover {
+    transform: scale(1.05); /* Increase size by 5% */
   }
 
   /* Responsive adjustment */
