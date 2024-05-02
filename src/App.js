@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TagsInput from './components/Tagsinput';
 import FeaturedRecipes from './components/FeaturedRecipes';
 import RecipeCardDisplay from './components/RecipeCardDisplay';
@@ -12,6 +12,7 @@ function App() {
   const [aiTags, setAiTags] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [recipes, setRecipes] = useState([]);
+  const [featuredRecipes, setFeaturedRecipes] = useState([]);
   
 
   const recipesTest = [
@@ -106,6 +107,25 @@ function App() {
     }
   };
 
+  // Function to fetch featured recipes
+  const getFeaturedRecipes = async () => {
+    try {
+      const response = await fetch('/RR/get_featured_recipes'); // Call your endpoint
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setFeaturedRecipes(data); // Update your state with the fetched recipes
+    } catch (error) {
+      console.error("Failed to fetch featured recipes:", error);
+    }
+  };
+
+  // useEffect hook to fetch featured recipes when the component mounts
+  useEffect(() => {
+    getFeaturedRecipes();
+  }, []); // The empty array ensures this effect runs only once after initial render
+
   if (data) {
     console.log(data);
   }
@@ -159,7 +179,7 @@ function App() {
           </div>
         </div>
       </div>
-      <FeaturedRecipes recipes={recipesTest}></FeaturedRecipes>
+      <FeaturedRecipes recipes={featuredRecipes}></FeaturedRecipes>
       {showModal && (
         <RecipeCardDisplay recipes={recipes} onClose={() => setShowModal(false)} />
       )}
