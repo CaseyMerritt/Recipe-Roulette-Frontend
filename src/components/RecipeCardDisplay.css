@@ -66,6 +66,7 @@
     width: 300px; /* Fixed width for each card */
     cursor: pointer;
     transition: transform 0.3s ease; /* Smooth transition for transform */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6), -10px 10px 20px rgba(0, 0, 0, 0.6); /* Top shadow */
   }
   
   .recipe-card-modal:hover {
@@ -151,6 +152,7 @@
     font-size: 16px;
     cursor: pointer;
     align-self: center; /* Center the button within flex container */
+    
   }
 
   .share-button-modal:hover {

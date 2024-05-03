@@ -1,10 +1,14 @@
 .app-layout {
+  background-image: url('/public/Background5.jpg'); /* Adjust the path as necessary */
+  background-size: cover; /* Cover the entire area of the element */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the image */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* Instead of height, use min-height */
-  background-color: #033232;
+  background-color: rgb(3, 50, 50);
   width: 100%; /* Ensure it takes the full width */
 }
 
@@ -29,20 +33,31 @@
   flex: 1; /* This will make app-content grow to fill available space */
 }
 
-.left-section, .right-section {
+.left-section {
+  margin-left: -60px; /* Moves left section 50px to the left */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 40%; /* Adjust width as needed */
+  width: 40%;
+}
+
+.right-section {
+  margin-right: -60px; /* Moves right section 50px to the right */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
 }
 
 .border-box {
-  background-color: rgba(0, 0, 0, 0.01); /* Semi-transparent background */
+  /*background-color: rgba(3, 50, 50, 0.9); /* Semi-transparent background */
+  background: radial-gradient(circle, rgba(65, 22, 0, 0.8), rgb(43, 0, 44));
   backdrop-filter: blur(5px); /* Blurred background */
   padding: 50px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  border-radius: 20px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.6), 0 20px 20px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow */
 }
 
 .header-section {
@@ -52,7 +67,9 @@
   justify-content: center;
   margin-left: 20px;
   color: #fff;
-  font-size: 16px;
+  font-size: x-large;
+  font-weight: 500;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* Ensure the first header section doesn't have extra left margin */
@@ -82,9 +99,48 @@
 }
 
 .range{
+  color: #F85A00;
   height: 80px;
   width: 380px;
   padding: 0 10px 0 10px;
+}
+
+/* Adjusting the thumb to align with the new track height */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Removes default WebKit styling */
+  appearance: none;
+  width: 20px; /* Width of the thumb */
+  height: 20px; /* Height of the thumb, consider adjusting if needed */
+  background: #FEA236; /* Background color of the thumb */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10px; /* Rounded corners */
+  margin-top: -8px; /* Adjust this value to vertically center the thumb with the track */
+}
+
+input[type="range"] {
+  -webkit-appearance: none;  /* Removes default styling for WebKit browsers */
+  appearance: none;         /* Removes default styling for other browsers */
+  width: 100%;              /* Full-width */
+  height: 8px;              /* Specified height of the slider */
+  background: #FEA236;         /* Background color of the slider */
+  outline: none;            /* Removes the outline */
+}
+
+/* WebKit-based browsers */
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #F85A00; /* New hover color for the thumb */
+}
+
+/* WebKit-based browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; /* Adjust this value to make the track thinner */
+  background-color: #FEA236; /* New hover color for the track */
+}
+
+/* WebKit-based browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; /* Adjust this value to make the track thinner */
+  background-color: #FEA236; /* New hover color for the track */
 }
 
 .range .slider-value {
@@ -93,7 +149,6 @@
   text-align: center; /* Center the text horizontally */
 }
 
-
 .range .slider-value span{
   font-size:  18px;
   font-weight: 600;
@@ -101,6 +156,7 @@
 }
 
 .range .field{
+  color: #F85A00;
   position: relative;
   display: flex;
   align-items: center;
@@ -133,6 +189,7 @@
 
 .login-button {
   /* Style your login button as needed */
+  display: none;
   padding: 8px 15px;
   background-color: #FEA236; /* Bootstrap primary blue, adjust as needed */
   color: white;
@@ -160,6 +217,7 @@
 }
 
 .centered-logo {
+  display: none;
   max-width: 512px; /* Adjust based on your logo size */
   max-height: 512px;
 }
