@@ -9,6 +9,7 @@ function FeaturedRecipes({ recipes }) {
                 <img src={recipe.images[0]} alt={recipe.title} className="recipe-image"/>
                 <div className='recipe-content'>
                     <div className="recipe-title">{recipe.title}</div>
+                    <div className="recipe-title-line"></div> {/* Horizontal line between title and description */}
                     <div className='recipe-description'>{recipe.description}</div>
                     <button className="view-more-button">View More</button>
                 </div>

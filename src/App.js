@@ -16,31 +16,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [completeRotation, setCompleteRotation] = useState(false);
   
-
-  const recipesTest = [
-    {
-      title: 'Spaghetti Carbonara',
-      image: 'https://via.placeholder.com/150?text=Spaghetti+Carbonara',
-      description: 'Test'
-    },
-    {
-      title: 'Classic Ratatouille',
-      image: 'https://via.placeholder.com/150?text=Classic+Ratatouille',
-      description: 'Test'
-    },
-    {
-      title: 'Chicken Tikka Masala',
-      image: 'https://via.placeholder.com/150?text=Chicken+Tikka+Masala',
-      description: 'Test'
-    },
-    {
-      title: 'Beef Wellington',
-      image: 'https://via.placeholder.com/150?text=Beef+Wellington',
-      description: 'Test'
-    }
-  ];
-  
-
   const updateTags = (newTags) => {
     setTags(newTags); // Update the tags state in App
   };
@@ -92,6 +67,10 @@ function App() {
 
     } catch (error) {
       console.error('Failed to fetch data:', error);
+      setTimeout(() => {
+        setLoading(false);
+        setCompleteRotation(true);
+      }, 1000);
     }
 
     //setRecipes(recipesTest);
@@ -120,12 +99,13 @@ function App() {
       }
       const data = await response.json();
       setData(data);
-
       setRecipes(data);
       setShowModal(true);
 
     } catch (error) {
       console.error('Failed to fetch data:', error);
+      setLoading(false);
+      setCompleteRotation(true);
     }
 
     setLoading(false);
