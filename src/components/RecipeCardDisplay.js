@@ -68,7 +68,11 @@ function RecipeCardDisplay({ recipes, onClose }) {
                                 {selectedRecipes.includes(recipe) ? '✓' : ''}
                             </button>
                         </div>
-                        <img src={recipe.images[0] || placeholderImage} alt={recipe.title} className="recipe-image-modal" />
+                        <img 
+                            src={(recipe && recipe.images && recipe.images.length > 0 ? recipe.images[0] : placeholderImage)} 
+                            alt={recipe ? recipe.title : 'Recipe'} 
+                            className="recipe-image-modal" 
+                        />
                         <div className="recipe-title-modal">{recipe.title}</div>
                         <p className='recipe-description-modal'>{recipe.description}</p>
                         <button className="recipe-view-more-modal" onClick={(e) => handleViewMore(e, recipe)}>View More</button>

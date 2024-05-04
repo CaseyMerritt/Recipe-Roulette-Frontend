@@ -13,6 +13,8 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [featuredRecipes, setFeaturedRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [completeRotation, setCompleteRotation] = useState(false);
   
 
   const recipesTest = [
@@ -57,7 +59,14 @@ function App() {
   };
 
   const getRecipes = async () => {
-    // Assuming POST request to send count and tags as part of the request body
+    // Assuming POST request to send count and tags as part of the request body\
+    if(loading){
+      return;
+    }else{
+      setLoading(true);
+      setCompleteRotation(false);
+    }
+
     try {
       const response = await fetch('/RR/get_recipes', { // Updated endpoint
         method: 'POST',
@@ -71,9 +80,15 @@ function App() {
       }
       const data = await response.json();
       setData(data);
-
+      
       setRecipes(data);
-      setShowModal(true);
+
+      // Ensure spinner completes one full rotation
+      setTimeout(() => {
+        setLoading(false);
+        setCompleteRotation(true);
+        setShowModal(true);
+      }, 2000); // Set timeout to match the spinner's animation duration
 
     } catch (error) {
       console.error('Failed to fetch data:', error);
@@ -85,6 +100,13 @@ function App() {
 
   const getAiRecipes = async () => {
     // Assuming POST request to send count and tags as part of the request body
+    if(loading){
+      return;
+    }else{
+      setLoading(true);
+      setCompleteRotation(false);
+    }
+
     try {
       const response = await fetch('/RR/get_ai_recipe', { // Updated endpoint
         method: 'POST',
@@ -105,10 +127,44 @@ function App() {
     } catch (error) {
       console.error('Failed to fetch data:', error);
     }
+
+    setLoading(false);
+    setCompleteRotation(true);
   };
+
+  const setWithExpiry = (key, value, ttl) => {
+    const now = new Date();
+    const item = {
+        value: value,
+        expiry: now.getTime() + ttl,
+    };
+    localStorage.setItem(key, JSON.stringify(item));
+};
+
+const getWithExpiry = (key) => {
+    const itemStr = localStorage.getItem(key);
+    if (!itemStr) {
+        return null;
+    }
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    if (now.getTime() > item.expiry) {
+        localStorage.removeItem(key);
+        return null;
+    }
+    return item.value;
+};
+
 
   // Function to fetch featured recipes
   const getFeaturedRecipes = async () => {
+    // Check for cached data first
+    const cachedRecipes = getWithExpiry('featuredRecipes');
+    if (cachedRecipes) {
+        setFeaturedRecipes(cachedRecipes);
+        return;
+    }
+
     try {
       const response = await fetch('/RR/get_featured_recipes'); // Call your endpoint
       if (!response.ok) {
@@ -116,6 +172,9 @@ function App() {
       }
       const data = await response.json();
       setFeaturedRecipes(data); // Update your state with the fetched recipes
+
+      // Cache the data with a 1 week expiry (1 week = 604800000 milliseconds)
+      setWithExpiry('featuredRecipes', data, 604800000);
     } catch (error) {
       console.error("Failed to fetch featured recipes:", error);
     }
@@ -162,7 +221,7 @@ function App() {
           </div>
         </div>
         <div className="centered-logo-container">
-          <img src={'/RecipeRouletteLogo.png'} alt="Logo" className="centered-logo" />
+          <img src='/Spinner4.png' className={`spinner ${loading && !completeRotation ? 'spinning' : ''}`}></img>
         </div>
         <div className="right-section">
           <div className='border-box'>

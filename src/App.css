@@ -1,5 +1,5 @@
 .app-layout {
-  background-image: url('/public/Background5.jpg'); /* Adjust the path as necessary */
+  background-image: url('/public/Background6.jpg'); /* Adjust the path as necessary */
   background-size: cover; /* Cover the entire area of the element */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -214,6 +214,21 @@ input[type="range"]::-webkit-slider-runnable-track {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+}
+
+.spinner {
+  width: 970px;
+  height: 970px;
+  transition: transform 0.5s ease;
+}
+
+.spinning {
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); filter: blur(5px);}
+  to { transform: rotate(360deg); filter: blur(5px);}
 }
 
 .centered-logo {
