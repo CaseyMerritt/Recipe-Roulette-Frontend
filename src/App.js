@@ -201,6 +201,7 @@ const getWithExpiry = (key) => {
           </div>
         </div>
         <div className="centered-logo-container">
+          <img src='/SpinnerBackground2.png' className="spinner-background"></img>
           <img src='/Spinner4.png' className={`spinner ${loading && !completeRotation ? 'spinning' : ''}`}></img>
         </div>
         <div className="right-section">

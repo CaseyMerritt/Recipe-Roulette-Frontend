@@ -17,7 +17,8 @@
   .modal-content {
     position: relative; /* This makes it a reference for absolutely positioned children */
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     max-height: 100%;
     overflow-x: auto;
@@ -30,6 +31,7 @@
     align-items: center; /* Correctly align items to the center vertically */
     justify-content: center; /* Align child elements to the left */
     color: white;
+    font-family: 'Baloo 2';
     font-size: 30px;
   }
   
@@ -59,7 +61,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px;
+    margin: 20px;
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
@@ -139,12 +141,7 @@
   }
   
   .share-button-modal {
-    position: absolute;
-    bottom: 0%; /* Sets the button 70% from the top or 30% from the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Offset by half its width to truly center it */
     padding: 10px 20px;
-    margin-top: 20px; /* Space above the button */
     background-color: #4CAF50; /* A green background */
     color: white; /* White text */
     border: none;
@@ -160,14 +157,9 @@
   }
 
   .email-input-container {
-    position: absolute;
-    bottom: 0%; /* Sets the button 70% from the top or 30% from the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Offset by half its width to truly center it */
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
   }
 
   .email-input-modal {

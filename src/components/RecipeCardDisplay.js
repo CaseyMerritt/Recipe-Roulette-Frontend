@@ -12,7 +12,8 @@ function RecipeCardDisplay({ recipes, onClose }) {
         setSelectedRecipes(isSelected ? selectedRecipes.filter(r => r !== recipe) : [...selectedRecipes, recipe]);
     };
 
-    const handleShareButtonClick = () => {
+    const handleShareButtonClick = (e) => {
+        e.stopPropagation();  // Stop the event from propagating
         setShowEmailInput(true);  // Show email input when share button is clicked
     };
 
@@ -20,7 +21,8 @@ function RecipeCardDisplay({ recipes, onClose }) {
         setEmail(e.target.value); // Update the email state as the user types
     };
 
-    const handleSubmitEmail = async () => {
+    const handleSubmitEmail = async (e) => {
+        e.stopPropagation();  // Stop the event from propagating
         const payload = {
             email: email,
             recipes: selectedRecipes
@@ -78,14 +80,14 @@ function RecipeCardDisplay({ recipes, onClose }) {
                         <button className="recipe-view-more-modal" onClick={(e) => handleViewMore(e, recipe)}>View More</button>
                     </div>
                 ))}
-                {!showEmailInput && <button className="share-button-modal" onClick={handleShareButtonClick}>Get Grocery List</button>}
-                {showEmailInput && (
-                    <div className="email-input-container">
-                        <input type="email" placeholder="Enter your email" className="email-input-modal" value={email} onChange={handleEmailChange}/>
-                        <button className="submit-email-button" onClick={handleSubmitEmail}>Submit</button>
-                    </div>
-                )}
             </div>
+            {!showEmailInput && <button className="share-button-modal" onClick={(e) => handleShareButtonClick(e)}>Get Grocery List</button>}
+            {showEmailInput && (
+                <div className="email-input-container">
+                    <input type="email" placeholder="Enter your email" className="email-input-modal" value={email} onClick={(e) => e.stopPropagation()} onChange={handleEmailChange}/>
+                    <button className="submit-email-button" onClick={(e) => handleSubmitEmail(e)}>Submit</button>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,5 +1,5 @@
 .app-layout {
-  background-image: url('/public/Background6.jpg'); /* Adjust the path as necessary */
+  background-image: url('/public/Background7.jpg'); /* Adjust the path as necessary */
   background-size: cover; /* Cover the entire area of the element */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -211,16 +211,28 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .centered-logo-container {
+  position: relative; /* Establishes a positioning context */
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
+  flex-grow: 2;
+}
+
+.spinner-background {
+  position: absolute;
+  top: 18%; /* May need adjustment if scaling changes aspect ratios */
+  width: 40vw; /* 80% of the viewport width */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 0;
 }
 
 .spinner {
-  width: 970px;
-  height: 970px;
+  position: relative;
+  width: 32vw; /* 60% of the viewport width */
+  height: auto; /* Height auto to maintain aspect ratio */
+  z-index: 1;
   transition: transform 0.5s ease;
+  top: -1%; /* Adjust if necessary based on screen size */
 }
 
 .spinning {
@@ -230,10 +242,4 @@ input[type="range"]::-webkit-slider-runnable-track {
 @keyframes spin {
   from { transform: rotate(0deg); filter: blur(5px);}
   to { transform: rotate(360deg); filter: blur(5px);}
-}
-
-.centered-logo {
-  display: none;
-  max-width: 512px; /* Adjust based on your logo size */
-  max-height: 512px;
 }
