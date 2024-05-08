@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TagsInput from './components/Tagsinput';
 import FeaturedRecipes from './components/FeaturedRecipes';
 import RecipeCardDisplay from './components/RecipeCardDisplay';
+import RecipeExpandCard from './components/RecipeExpandCard';
 import ErrorPopup from './components/ErrorPopup'; // Import the new component
 import './App.css';
 
@@ -17,6 +18,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [completeRotation, setCompleteRotation] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedRecipe, setSelectedRecipe] = useState(null); // To hold the currently selected recipe for expansion
+
   
   const updateTags = (newTags) => {
     setTags(newTags); // Update the tags state in App
@@ -105,7 +108,7 @@ function App() {
 
       const data = await response.json();
       setData(data);
-      setRecipes(data);
+      setSelectedRecipe(data); // Assuming the endpoint returns a single recipe
       setShowModal(true);
 
       setLoading(false);
@@ -234,9 +237,18 @@ const getWithExpiry = (key) => {
         </div>
       </div>
       <FeaturedRecipes recipes={featuredRecipes}></FeaturedRecipes>
-      {showModal && (
-        <RecipeCardDisplay recipes={recipes} onClose={() => setShowModal(false)} />
+      {recipes && showModal && (
+        <RecipeCardDisplay recipes={recipes} onClose={() => {setShowModal(false); setRecipes(null);}} />
       )}
+      {selectedRecipe && showModal && (
+            <RecipeExpandCard
+                recipe={selectedRecipe}
+                onClose={() => {
+                    setShowModal(false);
+                    setSelectedRecipe(null);
+                }}
+            />
+        )}
       {errorMessage && (
         <ErrorPopup
           message={errorMessage}

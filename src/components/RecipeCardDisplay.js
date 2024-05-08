@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './RecipeCardDisplay.css';
+import RecipeExpandCard from './RecipeExpandCard'; 
 
 function RecipeCardDisplay({ recipes, onClose }) {
     const placeholderImage = 'https://via.placeholder.com/150';
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showEmailInput, setShowEmailInput] = useState(false);  // State to manage email input visibility
     const [email, setEmail] = useState(''); // State to store the email input
+    const [expandedRecipe, setExpandedRecipe] = useState(null);
 
     const toggleRecipeSelection = (recipe) => {
         const isSelected = selectedRecipes.includes(recipe);
@@ -47,9 +49,13 @@ function RecipeCardDisplay({ recipes, onClose }) {
         }
     };
 
-    const handleViewMore = (e, recipe) => {
-        e.stopPropagation(); // Stop the event from propagating to parent elements
-        console.log("Viewing more details for:", recipe.title); // Placeholder for whatever you want to do here
+    const handleViewMore = (e,recipe) => {
+        e.stopPropagation();
+        setExpandedRecipe(recipe); // Set the recipe to be expanded
+    };
+
+    const handleExpandClose = () => {
+        setExpandedRecipe(null); // Close the expand view
     };
 
     const normalizedRecipes = Array.isArray(recipes) ? recipes : [recipes];
@@ -87,6 +93,12 @@ function RecipeCardDisplay({ recipes, onClose }) {
                     <input type="email" placeholder="Enter your email" className="email-input-modal" value={email} onClick={(e) => e.stopPropagation()} onChange={handleEmailChange}/>
                     <button className="submit-email-button" onClick={(e) => handleSubmitEmail(e)}>Submit</button>
                 </div>
+            )}
+            {expandedRecipe && (
+                <RecipeExpandCard 
+                    recipe={expandedRecipe} 
+                    onClose={handleExpandClose} 
+                />
             )}
         </div>
     );
