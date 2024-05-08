@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TagsInput from './components/Tagsinput';
 import FeaturedRecipes from './components/FeaturedRecipes';
 import RecipeCardDisplay from './components/RecipeCardDisplay';
+import ErrorPopup from './components/ErrorPopup'; // Import the new component
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [featuredRecipes, setFeaturedRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [completeRotation, setCompleteRotation] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   
   const updateTags = (newTags) => {
     setTags(newTags); // Update the tags state in App
@@ -50,12 +52,14 @@ function App() {
         },
         body: JSON.stringify({ tags, count }), // Send count and tags in the request body
       });
+
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText} test`);
+        const responseData = await response.json();
+        throw new Error(`${responseData.Error}`);
       }
+
       const data = await response.json();
       setData(data);
-      
       setRecipes(data);
 
       // Ensure spinner completes one full rotation
@@ -67,14 +71,13 @@ function App() {
 
     } catch (error) {
       console.error('Failed to fetch data:', error);
+      
       setTimeout(() => {
         setLoading(false);
         setCompleteRotation(true);
+        setErrorMessage(error.message)
       }, 1000);
     }
-
-    //setRecipes(recipesTest);
-    //setShowModal(true);
   };
 
   const getAiRecipes = async () => {
@@ -94,22 +97,29 @@ function App() {
         },
         body: JSON.stringify({ ingredients, aiTags }), // Send count and tags in the request body
       });
+
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText} test`);
+        const responseData = await response.json();
+        throw new Error(`${responseData.Error}`);
       }
+
       const data = await response.json();
       setData(data);
       setRecipes(data);
       setShowModal(true);
 
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
       setLoading(false);
       setCompleteRotation(true);
-    }
 
-    setLoading(false);
-    setCompleteRotation(true);
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+      // Ensure spinner completes one full rotation
+      setTimeout(() => {
+        setLoading(false);
+        setCompleteRotation(true);
+        setErrorMessage(error.message)
+      }, 1000); // Set timeout to match the spinner's animation duration
+    }
   };
 
   const setWithExpiry = (key, value, ttl) => {
@@ -147,9 +157,12 @@ const getWithExpiry = (key) => {
 
     try {
       const response = await fetch('/RR/get_featured_recipes'); // Call your endpoint
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        const responseData = await response.json();
+        throw new Error(`${responseData.Error}`);
       }
+
       const data = await response.json();
       setFeaturedRecipes(data); // Update your state with the fetched recipes
 
@@ -157,6 +170,7 @@ const getWithExpiry = (key) => {
       setWithExpiry('featuredRecipes', data, 604800000);
     } catch (error) {
       console.error("Failed to fetch featured recipes:", error);
+      setErrorMessage(error.message)
     }
   };
 
@@ -222,6 +236,12 @@ const getWithExpiry = (key) => {
       <FeaturedRecipes recipes={featuredRecipes}></FeaturedRecipes>
       {showModal && (
         <RecipeCardDisplay recipes={recipes} onClose={() => setShowModal(false)} />
+      )}
+      {errorMessage && (
+        <ErrorPopup
+          message={errorMessage}
+          onClose={() => setErrorMessage('')}
+        />
       )}
     </div>
   );

@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Ensure it takes the full width of the screen */
-    max-height: 300px; /* Limit the maximum height */
-    overflow: hidden; /* Hide overflow */
+    max-width: 100%; /* Ensure it takes the full width of the screen */
+    height: auto; /* Limit the maximum height */
+    overflow-x: hidden;
+    overflow-y: auto;
     box-shadow: 0px -20px 20px 0px rgba(0, 0, 0, 0.6); /* Top shadow */; /* Adds a subtle shadow */
   }
   
@@ -12,20 +13,20 @@
     display: flex;
     justify-content: space-between; /* Spread the cards across the container */
     width: 100%; /* Take up the full width of its parent */
-    padding: 0 20px; /* Padding on the sides */
+    padding: 0px 20px; /* Padding on the sides */
   }
   
   .recipe-card {
     display: flex;
     width: 25%; /* Adjust width to fit 4 cards across, accounting for margin */
     background: linear-gradient(to bottom, rgba(2, 33, 25, .9), rgb(1, 31, 24), rgb(1, 12, 9));
+    padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-    overflow: hidden; /* Ensure content doesn't overflow the card */
   }
 
   .recipe-content {
-    margin-left: 10px;
+    margin-left: 20px;
     margin-right: 10px;
     display: flex;
     flex-direction: column;
@@ -60,11 +61,12 @@
   .recipe-image {
     width: 40%; /* Adjust image width as needed */
     height: auto;
-    margin-right: 10px; /* Space between image and title */
+    margin-right: 10px;
     object-fit: cover; /* Ensure the image covers the area, might crop */
   }
-  
+
   .view-more-button {
+    margin-top: 10px;
     padding: 8px 16px;
     background-color: #FEA236; /* Bootstrap primary blue */
     color: #ffffff;

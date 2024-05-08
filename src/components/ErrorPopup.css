@@ -1,0 +1,50 @@
+.error-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering vertically as well */
+    z-index: 1000;
+    background-color: rgb(139, 139, 139);
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align all child elements horizontally */
+    justify-content: center; /* Center-align all child elements vertically */
+}
+
+.error-title {
+    display: flex;
+    align-items: center; /* Center-align all child elements horizontally */
+    justify-content: center; /* Center-align all child elements vertically */
+    color: red;
+    font-family: 'Baloo 2', cursive; /* Adding Baloo 2 font */
+    font-size: x-large;
+    font-weight: bold;
+}
+  
+.error-message {
+    display: flex;
+    align-items: center; /* Center-align all child elements horizontally */
+    justify-content: center; /* Center-align all child elements vertically */
+    font-family: 'Baloo 2', cursive; /* Adding Baloo 2 font */
+    padding-bottom: 5px;
+}
+
+.error-button-contianer{
+    display: flex;
+    align-items: center; /* Center-align all child elements horizontally */
+    justify-content: center; /* Center-align all child elements vertically */
+}
+  
+.error-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Baloo 2', cursive; /* Adding Baloo 2 font */
+}
